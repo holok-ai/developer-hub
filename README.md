@@ -11,3 +11,11 @@ Guides for building on Holokai: write **neurons** that execute work, author **wo
 | Neuron Architecture | [`Neuron-Architecture.pdf`](docs/pdf/Neuron-Architecture.pdf) |
 | Neuron SDK — TypeScript | [`Neuron-SDK-Reference.pdf`](docs/pdf/Neuron-SDK-Reference.pdf) |
 | Neuron SDK — Python | [`Neuron-SDK-Python-Reference.pdf`](docs/pdf/Neuron-SDK-Python-Reference.pdf) |
+
+## Examples
+
+Runnable examples to copy from:
+
+- [`examples/neurons/typescript`](examples/neurons/typescript) — a TypeScript neuron
+- [`examples/neurons/python`](examples/neurons/python) — Python neurons (`http_fetch`, `web_search`)
+- [`examples/policy`](examples/policy) — a sample org policy (Moku decision matrix + compiled Shield bundle)

@@ -1,0 +1,10 @@
+{
+  "confidential": {
+    "consumer":     { "action": "block", "condition_groups": [] },
+    "standard-api": { "action": "allow", "condition_groups": [] }
+  },
+  "public": {
+    "consumer":     { "action": "allow", "condition_groups": [] },
+    "standard-api": { "action": "allow", "condition_groups": [] }
+  }
+}

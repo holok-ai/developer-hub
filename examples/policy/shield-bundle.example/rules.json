@@ -1,0 +1,9 @@
+{
+  "SSN": {
+    "consumer":     { "action": "block",     "condition_groups": [] },
+    "standard-api": { "action": "remediate", "treatment": "anonymization", "condition_groups": [["hipaa_baa_signed"]] }
+  },
+  "EMAIL_ADDRESS": {
+    "standard-api": { "action": "remediate", "treatment": "redaction", "condition_groups": [] }
+  }
+}

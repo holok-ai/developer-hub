@@ -1,0 +1,8 @@
+{
+  "EMAIL_ADDRESS": [
+    { "pattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", "kind": "match", "engine": "regex", "flags": ["i"], "priority": 100 }
+  ],
+  "SSN": [
+    { "pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b", "kind": "match", "engine": "regex", "flags": [], "priority": 100 }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "hipaa_baa_signed": {
+    "name": "HIPAA BAA signed",
+    "prompt": "Is a Business Associate Agreement in place with this destination?",
+    "reference": "HIPAA §164.504(e)"
+  }
+}

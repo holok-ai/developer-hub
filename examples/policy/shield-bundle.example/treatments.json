@@ -1,0 +1,5 @@
+{
+  "clear":         { "display_name": "Clear",         "level": 1 },
+  "redaction":     { "display_name": "Redaction",     "level": 6 },
+  "anonymization": { "display_name": "Anonymization", "level": 9 }
+}

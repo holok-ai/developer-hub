@@ -1,0 +1,120 @@
+"""CLI runner: connect to a BigBrain gateway and offer `examples/web.search`.
+
+Usage:
+
+    BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \\
+    BIGBRAIN_NEURON_ID=my-python-neuron-1 \\
+    BIGBRAIN_TOKEN=eyJ... \\
+    python -m examples.web_search
+
+Optional:
+    EXAMPLES_WEB_SEARCH_ENDPOINT=https://your.searxng/search?format=json
+    EXAMPLES_WEB_SEARCH_UA="custom user agent"
+"""
+
+from __future__ import annotations
+
+import asyncio
+import logging
+import os
+import signal
+import sys
+from collections.abc import Callable
+from pathlib import Path
+
+from holokai_neuron_sdk import Neuron
+
+from .capability import (
+    CAPABILITY,
+    INPUT_SCHEMA,
+    OUTPUT_SCHEMA,
+    handle_web_search,
+)
+
+log = logging.getLogger("examples.web_search")
+
+
+def _build_auth_callback() -> Callable[[], str]:
+    static = os.environ.get("BIGBRAIN_TOKEN")
+    if static:
+        return lambda: static
+
+    token_file = os.environ.get("BIGBRAIN_TOKEN_FILE")
+    if token_file:
+        path = Path(token_file)
+
+        def _read() -> str:
+            return path.read_text(encoding="utf-8").strip()
+
+        return _read
+
+    raise SystemExit(
+        "Set BIGBRAIN_TOKEN or BIGBRAIN_TOKEN_FILE so the SDK can authenticate."
+    )
+
+
+async def _run() -> int:
+    logging.basicConfig(
+        level=os.environ.get("LOG_LEVEL", "INFO").upper(),
+        format="%(asctime)s %(levelname)s %(name)s %(message)s",
+    )
+
+    gateway_url = os.environ.get("BIGBRAIN_GATEWAY_URL")
+    neuron_id = os.environ.get("BIGBRAIN_NEURON_ID")
+    if not gateway_url or not neuron_id:
+        print(
+            "BIGBRAIN_GATEWAY_URL and BIGBRAIN_NEURON_ID are required.",
+            file=sys.stderr,
+        )
+        return 2
+
+    auth = _build_auth_callback()
+    neuron = Neuron(
+        gateway_url=gateway_url,
+        neuron_id=neuron_id,
+        auth=auth,
+        logger=log,
+    )
+    neuron.register_handler(
+        CAPABILITY,
+        handle_web_search,
+        input_schema=INPUT_SCHEMA,
+        output_schema=OUTPUT_SCHEMA,
+    )
+    neuron.on(
+        "connection:registered",
+        lambda info: log.info("registered", extra={"session_id": info["session_id"]}),
+    )
+    neuron.on("error", lambda err: log.warning("transport error: %r", err))
+
+    stop_event = asyncio.Event()
+
+    def _request_stop(*_args: object) -> None:
+        log.info("shutdown signal received")
+        stop_event.set()
+
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        try:
+            loop.add_signal_handler(sig, _request_stop)
+        except NotImplementedError:
+            signal.signal(sig, _request_stop)
+
+    await neuron.start()
+    log.info("neuron started; offering examples/web.search")
+    try:
+        await stop_event.wait()
+    finally:
+        await neuron.stop(drain=True, timeout=30)
+    return 0
+
+
+def main() -> int:
+    try:
+        return asyncio.run(_run())
+    except KeyboardInterrupt:
+        return 130
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

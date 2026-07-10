@@ -1,0 +1,4 @@
+{
+  "public":       { "friendly_name": "Public",       "description": "Non-sensitive, shareable content.", "rank": 0,  "is_default": true },
+  "confidential": { "friendly_name": "Confidential", "description": "Sensitive internal content.",       "rank": 10, "is_default": false }
+}

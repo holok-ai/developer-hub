@@ -1,0 +1,48 @@
+{
+  "_comment": "Moku-side org policy for 'acme' (illustrative shape; authored via the /api/v1/policy/org/* endpoints). predicateKind: 'true'=allow, 'false'=block (reason required), 'formula'=allow iff the CNF over acknowledgements holds.",
+  "org": "acme",
+  "enrollments": [
+    { "regulation": "hipaa", "versionPin": null }
+  ],
+  "classifications": [
+    { "slug": "public",       "displayName": "Public",       "rank": 0,  "isDefault": true },
+    { "slug": "confidential", "displayName": "Confidential", "rank": 10, "isDefault": false }
+  ],
+  "acknowledgements": [
+    {
+      "slug": "hipaa_baa_signed",
+      "name": "HIPAA BAA signed",
+      "prompt": "Is a Business Associate Agreement in place with this destination?",
+      "reference": "HIPAA §164.504(e)"
+    }
+  ],
+  "regulationMatrix": [
+    {
+      "target": { "kind": "ner_label", "label": "SSN" },
+      "destination": "consumer",
+      "treatment": "*",
+      "predicateKind": "false",
+      "reason": "SSN may not be sent to consumer GenAI destinations."
+    },
+    {
+      "target": { "kind": "ner_label", "label": "SSN" },
+      "destination": "standard-api",
+      "treatment": "anonymization",
+      "predicateKind": "formula",
+      "conditionGroups": [["hipaa_baa_signed"]]
+    },
+    {
+      "target": { "kind": "ner_label", "label": "EMAIL_ADDRESS" },
+      "destination": "standard-api",
+      "treatment": "redaction",
+      "predicateKind": "formula",
+      "conditionGroups": []
+    }
+  ],
+  "orgClassificationMatrix": [
+    { "classification": "confidential", "destination": "consumer",     "treatment": "clear", "predicateKind": "false", "reason": "Confidential documents may not reach consumer destinations." },
+    { "classification": "confidential", "destination": "standard-api", "treatment": "clear", "predicateKind": "true" },
+    { "classification": "public",       "destination": "consumer",     "treatment": "clear", "predicateKind": "true" },
+    { "classification": "public",       "destination": "standard-api", "treatment": "clear", "predicateKind": "true" }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "SSN":           { "display_name": "Social Security Number", "category": "government_id" },
+  "EMAIL_ADDRESS": { "display_name": "Email Address",          "category": "contact" }
+}

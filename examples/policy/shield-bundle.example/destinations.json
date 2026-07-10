@@ -1,0 +1,8 @@
+{
+  "on-device":      { "display_name": "On-device" },
+  "self-hosted":    { "display_name": "Self-hosted" },
+  "private-cloud":  { "display_name": "Private cloud" },
+  "enterprise-api": { "display_name": "Enterprise API" },
+  "standard-api":   { "display_name": "Standard API" },
+  "consumer":       { "display_name": "Consumer" }
+}
