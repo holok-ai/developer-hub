@@ -22,10 +22,15 @@
  *   BIGBRAIN_TOKEN=eyJhbGciOi... \
  *   BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
  *   npm start
+ *
+ * Auth is resolved by ./auth.ts: the enrolled credential (client_credentials,
+ * no JWT env) is preferred; BIGBRAIN_TOKEN is the dev fallback. See
+ * ../README.md#authentication.
  */
-import { readFileSync } from 'node:fs';
 import { Neuron, defineCapability } from '@holokai/neuron-sdk';
 import { z } from 'zod';
+
+import { resolveAuth } from './auth.js';
 
 const DEFAULT_ENDPOINT = 'https://html.duckduckgo.com/html/';
 // DDG returns an empty list for a bare default UA — a real-looking UA is part
@@ -61,14 +66,6 @@ interface SearchResult {
   snippet: string;
 }
 
-function authCallback(): string {
-  const token = process.env.BIGBRAIN_TOKEN;
-  if (token) return token;
-  const file = process.env.BIGBRAIN_TOKEN_FILE;
-  if (file) return readFileSync(file, 'utf8').trim();
-  throw new Error('Set BIGBRAIN_TOKEN or BIGBRAIN_TOKEN_FILE so the SDK can authenticate.');
-}
-
 async function main(): Promise<void> {
   const gatewayUrl = process.env.BIGBRAIN_GATEWAY_URL;
   const neuronId = process.env.BIGBRAIN_NEURON_ID;
@@ -76,7 +73,7 @@ async function main(): Promise<void> {
     throw new Error('BIGBRAIN_GATEWAY_URL and BIGBRAIN_NEURON_ID are required.');
   }
 
-  const neuron = new Neuron({ gatewayUrl, neuronId, auth: authCallback });
+  const neuron = new Neuron({ gatewayUrl, neuronId, auth: resolveAuth() });
 
   neuron.handle(webSearch, async (input, ctx) => {
     const endpoint = process.env.EXAMPLES_WEB_SEARCH_ENDPOINT ?? DEFAULT_ENDPOINT;

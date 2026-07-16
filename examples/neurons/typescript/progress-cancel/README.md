@@ -47,8 +47,10 @@ Then send it a `examples/batch.process` task with, e.g.,
 `{ "items": ["a", "b", "c"], "perItemMs": 500 }` and cancel it mid-run to watch
 it stop within `perItemMs` rather than after the whole batch.
 
-`BIGBRAIN_TOKEN` is your gateway JWT. If you omit it, set `BIGBRAIN_TOKEN_FILE`
-to a path the SDK re-reads on every refresh. Use a **stable**
+`BIGBRAIN_TOKEN` here is the **quick-dev** path. A deployed neuron needs no JWT
+env var — enroll once and it mints its own tokens. Auth is handled by
+[`src/auth.ts`](./src/auth.ts) and documented once in
+**[../README.md → Authentication](../README.md#authentication)**. Use a **stable**
 `BIGBRAIN_NEURON_ID` across restarts.
 
 ## What to read next

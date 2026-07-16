@@ -18,9 +18,11 @@
  *   BIGBRAIN_TOKEN=eyJhbGciOi... \
  *   BIGBRAIN_NEURON_ID=my-mcp-bridge-1 \
  *   npm start
+ *
+ * Gateway auth is resolved by ./auth.ts: enrolled credential (no JWT env)
+ * preferred; BIGBRAIN_TOKEN is the dev fallback. See ../README.md#authentication.
  */
 import { spawn } from 'node:child_process';
-import { readFileSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -29,6 +31,7 @@ import { Neuron } from '@holokai/neuron-sdk';
 import type { CapabilityRegistration, Handler } from '@holokai/neuron-sdk';
 import { auth } from '@modelcontextprotocol/sdk/client/auth.js';
 
+import { resolveAuth } from './auth.js';
 import { loadCatalog, type CatalogServer } from './catalog.js';
 import {
   createMcpClient,
@@ -64,14 +67,6 @@ const ENVELOPE_OUTPUT_SCHEMA: JsonSchema = {
   required: ['content', 'isError'],
   additionalProperties: false,
 };
-
-function authCallback(): string {
-  const token = process.env.BIGBRAIN_TOKEN;
-  if (token) return token;
-  const file = process.env.BIGBRAIN_TOKEN_FILE;
-  if (file) return readFileSync(file, 'utf8').trim();
-  throw new Error('Set BIGBRAIN_TOKEN or BIGBRAIN_TOKEN_FILE so the SDK can authenticate.');
-}
 
 /** Print the authorize URL and best-effort launch the default browser. */
 function openBrowser(url: string): void {
@@ -231,7 +226,7 @@ async function main(): Promise<void> {
   await mkdir(tokenDir, { recursive: true, mode: 0o700 });
 
   const catalog = await loadCatalog(catalogPath);
-  const neuron = new Neuron({ gatewayUrl, neuronId, auth: authCallback });
+  const neuron = new Neuron({ gatewayUrl, neuronId, auth: resolveAuth() });
 
   // Best-effort per server: one bad server (bad command, declined OAuth) should
   // not stop the others. A neuron with zero capabilities is a hard error though.

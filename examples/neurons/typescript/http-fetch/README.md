@@ -23,25 +23,12 @@ BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
 npm start
 ```
 
-`BIGBRAIN_TOKEN` is your gateway JWT. If you omit it, set `BIGBRAIN_TOKEN_FILE`
-to a path the SDK re-reads on every refresh (rotate the token without
-restarting). Use a **stable** `BIGBRAIN_NEURON_ID` across restarts.
-
-For a deployed (non-dev) neuron, skip the static token entirely — enroll the
-machine once and mint short-lived tokens from the stored credential:
-
-```bash
-npx @holokai/neuron-sdk enroll --moku-url https://moku.example --name my-ts-neuron
-```
-
-```ts
-import { createClientCredentialsAuth, defaultCredentialPath } from '@holokai/neuron-sdk/auth';
-// pass this as the Neuron's `auth` option instead of the env token:
-const auth = createClientCredentialsAuth(defaultCredentialPath());
-```
-
-See `docs/NEURON_AUTH_SPEC.md` in the bigbrain repo for the full model
-(enrollment, approval, revocation).
+`BIGBRAIN_TOKEN` here is the **quick-dev** path. For a deployed neuron, skip the
+static token entirely — enroll the machine once and the neuron mints its own
+short-lived tokens (no JWT in the environment). Auth is handled by
+[`src/auth.ts`](./src/auth.ts) (`resolveAuth()`) and documented once for all
+examples in **[../README.md → Authentication](../README.md#authentication)**.
+Use a **stable** `BIGBRAIN_NEURON_ID` across restarts.
 
 ## What to read next
 

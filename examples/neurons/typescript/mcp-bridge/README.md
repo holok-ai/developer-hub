@@ -24,6 +24,14 @@ The default catalog includes the stdio **filesystem** server, which needs no
 auth and is the easiest way to see it work — start it and you'll see
 `mcp/filesystem/read_file`, `mcp/filesystem/list_directory`, … registered.
 
+> **Gateway auth vs. MCP-server auth — don't confuse them.** `BIGBRAIN_TOKEN`
+> above authenticates *this neuron to the BigBrain gateway* (the quick-dev path;
+> a deployed neuron enrolls instead and needs no JWT — see
+> [`src/auth.ts`](./src/auth.ts) and
+> [../README.md → Authentication](../README.md#authentication)). The `oauth`
+> blocks in the catalog below are separate — they authenticate the bridge to
+> each **MCP server** (e.g. Linear).
+
 ## The catalog
 
 `mcp.catalog.json` (path overridable with `MCP_CATALOG`):

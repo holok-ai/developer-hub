@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@holokai/neuron-sdk": "^0.2.0",
+    "@holokai/neuron-sdk": "^0.3.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
