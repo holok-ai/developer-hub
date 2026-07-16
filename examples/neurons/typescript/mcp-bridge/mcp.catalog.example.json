@@ -1,0 +1,23 @@
+{
+  "capabilityPrefix": "mcp",
+  "servers": [
+    {
+      "id": "filesystem",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/tmp"]
+    },
+    {
+      "id": "example-bearer",
+      "transport": "http",
+      "url": "https://your-mcp-server.example/mcp",
+      "auth": { "type": "bearer", "tokenEnv": "EXAMPLE_MCP_TOKEN" }
+    },
+    {
+      "id": "linear",
+      "transport": "http",
+      "url": "https://mcp.linear.app/mcp",
+      "auth": { "type": "oauth", "clientName": "My MCP bridge neuron" }
+    }
+  ]
+}

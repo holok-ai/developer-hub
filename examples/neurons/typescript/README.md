@@ -9,6 +9,7 @@ use case into your own project and go.
 | [`http-fetch/`](./http-fetch) | `examples/http.fetch` | The minimal complete neuron — typed capability (zod), abort-on-cancel, graceful shutdown |
 | [`progress-cancel/`](./progress-cancel) | `examples/batch.process` | Progress frames (`ctx.progress`) + cooperative cancellation (`ctx.signal`, abort-aware waiting) |
 | [`web-search/`](./web-search) | `examples/web.search` | A second capability with its own schema; terminal-vs-retryable failure classification (`ctx.fail`) |
+| [`mcp-bridge/`](./mcp-bridge) | `mcp/<server>/<tool>` (dynamic) | Reflect MCP-server tools into capabilities from a JSON catalog; stdio/http; `none`/`bearer`/`oauth` (PKCE loopback) auth |
 
 All of them: connect with a gateway URL + JWT, advertise an `any`-scoped
 capability, classify failures correctly, and shut down on SIGINT/SIGTERM.

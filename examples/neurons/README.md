@@ -8,6 +8,7 @@ process that connects to a BigBrain gateway and executes capability-typed tasks.
 | [`typescript/http-fetch/`](./typescript/http-fetch) | TypeScript | `examples/http.fetch` | Typed capability (zod), abort-on-cancel, graceful shutdown |
 | [`typescript/progress-cancel/`](./typescript/progress-cancel) | TypeScript | `examples/batch.process` | Progress frames + cooperative cancellation (abort-aware waiting) |
 | [`typescript/web-search/`](./typescript/web-search) | TypeScript | `examples/web.search` | Second capability; terminal-vs-retryable failure classification |
+| [`typescript/mcp-bridge/`](./typescript/mcp-bridge) | TypeScript | `mcp/<server>/<tool>` (dynamic) | Bridge MCP servers into capabilities from a JSON catalog; stdio/http; OAuth (PKCE loopback) |
 | [`python/http_fetch/`](./python/http_fetch) | Python | `examples/http.fetch` | Async handler, cancellation race, progress updates |
 | [`python/web_search/`](./python/web_search) | Python | `examples/web.search` | A second capability with its own schema |
 
