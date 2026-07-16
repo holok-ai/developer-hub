@@ -9,7 +9,7 @@ lease, run an `httpx` request, and ack with the response.
 ```bash
 cd packages/neuron-sdk-python
 pip install -e .
-BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
 BIGBRAIN_NEURON_ID=my-python-neuron-1 \
 BIGBRAIN_TOKEN=eyJhbGciOi... \
 python -m examples.http_fetch

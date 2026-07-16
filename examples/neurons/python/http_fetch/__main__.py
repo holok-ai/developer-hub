@@ -2,7 +2,7 @@
 
 Usage:
 
-    BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \\
+    BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \\
     BIGBRAIN_TOKEN=eyJhbGciOi... \\
     BIGBRAIN_NEURON_ID=my-python-neuron-1 \\
     python -m examples.http_fetch

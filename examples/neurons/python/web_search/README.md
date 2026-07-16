@@ -23,7 +23,7 @@ dependencies beyond `httpx` and stdlib `html.parser`.
 ```bash
 cd packages/neuron-sdk-python
 pip install -e .
-BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
 BIGBRAIN_NEURON_ID=my-python-neuron-1 \
 BIGBRAIN_TOKEN=eyJ... \
 python -m examples.web_search

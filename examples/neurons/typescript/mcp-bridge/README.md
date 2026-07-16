@@ -14,7 +14,28 @@ capability per tool, named `<prefix>/<serverId>/<toolName>`.
 ```bash
 npm install
 cp mcp.catalog.example.json mcp.catalog.json     # then edit it
-BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+```
+
+**Recommended — enroll once, then run with no token.** Registering the machine
+(an org admin approves it in Moku) lets the neuron mint its own short-lived
+tokens; there is no `BIGBRAIN_TOKEN` in the environment:
+
+```bash
+# one-time: register this machine as a neuron. This bridge advertises
+# mcp/<server>/<tool> capabilities derived from your catalog.
+npx @holokai/neuron-sdk enroll --moku-url https://moku.holokai.dev \
+  --name my-mcp-bridge
+
+# then start it — resolveAuth() finds the enrolled credential, no JWT needed
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
+BIGBRAIN_NEURON_ID=my-mcp-bridge-1 \
+npm start
+```
+
+**Quick-dev alternative** — paste a gateway JWT instead of enrolling:
+
+```bash
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
 BIGBRAIN_TOKEN=eyJhbGciOi... \
 BIGBRAIN_NEURON_ID=my-mcp-bridge-1 \
 npm start

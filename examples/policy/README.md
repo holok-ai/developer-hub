@@ -1,8 +1,7 @@
 # Sample policy config
 
 A worked example of one organization's policy as it exists on **both sides** of
-the publish pipeline described in
-[`docs/SHIELD_POLICY_GUIDE.md`](../../docs/SHIELD_POLICY_GUIDE.md):
+the Shield policy publish pipeline:
 
 1. **`org-decision-matrix.example.json`** — the *Moku side*: how an org admin
    authors the config (sensitivity tiers, acknowledgements, and decision-matrix

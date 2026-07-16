@@ -14,7 +14,7 @@
  * promptly. See docs/NEURON_DEVELOPERS_GUIDE.md.
  *
  * Run:
- *   BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+ *   BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
  *   BIGBRAIN_TOKEN=eyJhbGciOi... \
  *   BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
  *   npm start

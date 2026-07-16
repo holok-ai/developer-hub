@@ -37,7 +37,27 @@ SDK reports to the gateway as a **cancelled** nack (not a failure).
 
 ```bash
 npm install
-BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+```
+
+**Recommended — enroll once, then run with no token.** Registering the machine
+(an org admin approves it in Moku) lets the neuron mint its own short-lived
+tokens; there is no `BIGBRAIN_TOKEN` in the environment:
+
+```bash
+# one-time: register this machine as a neuron
+npx @holokai/neuron-sdk enroll --moku-url https://moku.holokai.dev \
+  --name my-ts-neuron --capabilities examples/batch.process
+
+# then start it — resolveAuth() finds the enrolled credential, no JWT needed
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
+BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
+npm start
+```
+
+**Quick-dev alternative** — paste a gateway JWT instead of enrolling:
+
+```bash
+BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
 BIGBRAIN_TOKEN=eyJhbGciOi... \
 BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
 npm start
@@ -47,9 +67,8 @@ Then send it a `examples/batch.process` task with, e.g.,
 `{ "items": ["a", "b", "c"], "perItemMs": 500 }` and cancel it mid-run to watch
 it stop within `perItemMs` rather than after the whole batch.
 
-`BIGBRAIN_TOKEN` here is the **quick-dev** path. A deployed neuron needs no JWT
-env var — enroll once and it mints its own tokens. Auth is handled by
-[`src/auth.ts`](./src/auth.ts) and documented once in
+Auth is resolved by [`src/auth.ts`](./src/auth.ts) (`resolveAuth()`; enrolled
+credential preferred, `BIGBRAIN_TOKEN` fallback), documented once in
 **[../README.md → Authentication](../README.md#authentication)**. Use a **stable**
 `BIGBRAIN_NEURON_ID` across restarts.
 

@@ -14,7 +14,7 @@
  * Run:
  *   cp mcp.catalog.example.json mcp.catalog.json   # then edit it
  *   npm install
- *   BIGBRAIN_GATEWAY_URL=https://api.holokai.dev \
+ *   BIGBRAIN_GATEWAY_URL=https://bigbrain.holokai.dev \
  *   BIGBRAIN_TOKEN=eyJhbGciOi... \
  *   BIGBRAIN_NEURON_ID=my-mcp-bridge-1 \
  *   npm start
