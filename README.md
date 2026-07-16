@@ -16,6 +16,6 @@ Guides for building on Holokai: write **neurons** that execute work, author **wo
 
 Runnable examples to copy from:
 
-- [`examples/neurons/typescript`](examples/neurons/typescript) — a TypeScript neuron
+- [`examples/neurons/typescript`](examples/neurons/typescript) — TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`, `mcp-bridge`)
 - [`examples/neurons/python`](examples/neurons/python) — Python neurons (`http_fetch`, `web_search`)
 - [`examples/policy`](examples/policy) — a sample org policy (Moku decision matrix + compiled Shield bundle)
