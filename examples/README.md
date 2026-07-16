@@ -4,7 +4,7 @@ Runnable examples for building on Holokai. These are published to the
 [developer hub](https://github.com/holok-ai/developer-hub) alongside the guides,
 and are typechecked against the current SDK in CI so they don't drift.
 
-- [`neurons/typescript`](neurons/typescript) — a minimal TypeScript neuron (`examples/http.fetch`)
+- [`neurons/typescript`](neurons/typescript) — TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`)
 - [`neurons/python`](neurons/python) — Python neurons (`http_fetch`, `web_search`)
 - [`policy`](policy) — a sample org policy (Moku decision matrix + compiled Shield bundle)
 

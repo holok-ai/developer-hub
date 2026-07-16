@@ -5,7 +5,9 @@ process that connects to a BigBrain gateway and executes capability-typed tasks.
 
 | Example | Language | Capability | What it shows |
 |---|---|---|---|
-| [`typescript/`](./typescript) | TypeScript | `examples/http.fetch` | Typed capability (zod), abort-on-cancel, graceful shutdown |
+| [`typescript/http-fetch/`](./typescript/http-fetch) | TypeScript | `examples/http.fetch` | Typed capability (zod), abort-on-cancel, graceful shutdown |
+| [`typescript/progress-cancel/`](./typescript/progress-cancel) | TypeScript | `examples/batch.process` | Progress frames + cooperative cancellation (abort-aware waiting) |
+| [`typescript/web-search/`](./typescript/web-search) | TypeScript | `examples/web.search` | Second capability; terminal-vs-retryable failure classification |
 | [`python/http_fetch/`](./python/http_fetch) | Python | `examples/http.fetch` | Async handler, cancellation race, progress updates |
 | [`python/web_search/`](./python/web_search) | Python | `examples/web.search` | A second capability with its own schema |
 
@@ -15,6 +17,7 @@ capability, classify failures correctly, and shut down on SIGTERM/SIGINT.
 Start with the [Neuron Developer's Guide](../../docs/NEURON_DEVELOPERS_GUIDE.md)
 for the mental model, then copy whichever example matches your language.
 
-> **SDK access:** both depend on Holokai's neuron SDK (`@holokai/neuron-sdk` /
-> `holokai-neuron-sdk`), published to Holokai's private registries. Configure
-> registry access first — see each example's README.
+> **SDK access:** these depend on Holokai's neuron SDK — `@holokai/neuron-sdk`
+> on public [npm](https://www.npmjs.com/package/@holokai/neuron-sdk) and
+> `holokai-neuron-sdk` on public [PyPI](https://pypi.org/project/holokai-neuron-sdk/).
+> Both install with no registry configuration or auth.
