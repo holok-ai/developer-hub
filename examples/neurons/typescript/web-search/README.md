@@ -70,4 +70,4 @@ credential preferred, `BIGBRAIN_TOKEN` fallback), documented once in
 
 ## What to read next
 
-- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/NEURON_DEVELOPERS_GUIDE.md) — the concepts behind this code.
+- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts behind this code.

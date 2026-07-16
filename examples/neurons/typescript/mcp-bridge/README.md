@@ -109,7 +109,7 @@ re-authorization.
 Each tool becomes a capability typed `<capabilityPrefix>/<serverId>/<toolName>`
 — e.g. `mcp/linear/create_issue`. This follows the documented convention
 `{owner}/{package}[/{name}][.{variant}]` (see
-[`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/NEURON_DEVELOPERS_GUIDE.md)).
+[`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf)).
 
 **Heads-up on the prefix.** The gateway's namespace-authz table authorizes
 `core/* · desktop/* · org/{orgId}/* · user/{userId}/*` — **`mcp/*` is not on
@@ -153,4 +153,4 @@ see the "Scope" section of the Developer's Guide.
 
 ## What to read next
 
-- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/NEURON_DEVELOPERS_GUIDE.md) — capabilities, scope, namespace auth.
+- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — capabilities, scope, namespace auth.

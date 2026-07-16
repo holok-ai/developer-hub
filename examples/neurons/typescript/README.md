@@ -47,5 +47,5 @@ So a deployed neuron needs **no JWT in its environment** — only the one-time
 enrollment. The `BIGBRAIN_TOKEN` shown in each example's quick-start is just the
 dev fallback.
 
-Start with the [Neuron Developer's Guide](../../../docs/NEURON_DEVELOPERS_GUIDE.md)
+Start with the [Neuron Developer's Guide](../../../docs/pdf/Neuron-Developers-Guide.pdf)
 for the mental model, then copy whichever example fits.

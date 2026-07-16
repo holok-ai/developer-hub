@@ -15,7 +15,7 @@ process that connects to a BigBrain gateway and executes capability-typed tasks.
 All of them: connect with a gateway URL + JWT, advertise an `any`-scoped
 capability, classify failures correctly, and shut down on SIGTERM/SIGINT.
 
-Start with the [Neuron Developer's Guide](../../docs/NEURON_DEVELOPERS_GUIDE.md)
+Start with the [Neuron Developer's Guide](../../docs/pdf/Neuron-Developers-Guide.pdf)
 for the mental model, then copy whichever example matches your language.
 
 > **SDK access:** these depend on Holokai's neuron SDK — `@holokai/neuron-sdk`

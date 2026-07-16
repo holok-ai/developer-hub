@@ -50,4 +50,4 @@ Use a **stable** `BIGBRAIN_NEURON_ID` across restarts.
 
 ## What to read next
 
-- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/NEURON_DEVELOPERS_GUIDE.md) — the concepts and decisions behind this code.
+- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts and decisions behind this code.
