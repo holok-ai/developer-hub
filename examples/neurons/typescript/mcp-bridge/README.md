@@ -48,7 +48,7 @@ auth and is the easiest way to see it work — start it and you'll see
 > **Gateway auth vs. MCP-server auth — don't confuse them.** `BIGBRAIN_TOKEN`
 > above authenticates *this neuron to the BigBrain gateway* (the quick-dev path;
 > a deployed neuron enrolls instead and needs no JWT — see
-> [`src/auth.ts`](./src/auth.ts) and
+> [`src/auth.ts`](src/auth.ts) and
 > [../README.md → Authentication](../README.md#authentication)). The `oauth`
 > blocks in the catalog below are separate — they authenticate the bridge to
 > each **MCP server** (e.g. Linear).
@@ -109,7 +109,7 @@ re-authorization.
 Each tool becomes a capability typed `<capabilityPrefix>/<serverId>/<toolName>`
 — e.g. `mcp/linear/create_issue`. This follows the documented convention
 `{owner}/{package}[/{name}][.{variant}]` (see
-[`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf)).
+[`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/pdf/Neuron-Developers-Guide.pdf)).
 
 **Heads-up on the prefix.** The gateway's namespace-authz table authorizes
 `core/* · desktop/* · org/{orgId}/* · user/{userId}/*` — **`mcp/*` is not on
@@ -153,4 +153,4 @@ see the "Scope" section of the Developer's Guide.
 
 ## What to read next
 
-- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — capabilities, scope, namespace auth.
+- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — capabilities, scope, namespace auth.

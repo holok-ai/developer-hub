@@ -1,8 +1,13 @@
 # Holokai Developer Hub
 
-> **Generated** by `holok-ai/bigbrain` CI — do not edit here. The source lives in bigbrain and is rendered + published on change.
+> **Generated** — do not edit here. Each section below is published by its own source repo
+> (`holok-ai/bigbrain`) through `holok-ai/cicd/actions/publish-developer-hub` and is replaced on change.
 
-Guides for building on Holokai: write **neurons** that execute work, author **workflow DAGs**, and use the SDKs.
+Guides for building on Holokai, and runnable examples to copy from.
+
+## BigBrain
+
+Write **neurons** that execute work, author **workflow DAGs**, and use the SDKs.
 
 | Guide | PDF |
 |---|---|
@@ -12,10 +17,9 @@ Guides for building on Holokai: write **neurons** that execute work, author **wo
 | Neuron SDK — TypeScript | [`Neuron-SDK-Reference.pdf`](docs/pdf/Neuron-SDK-Reference.pdf) |
 | Neuron SDK — Python | [`Neuron-SDK-Python-Reference.pdf`](docs/pdf/Neuron-SDK-Python-Reference.pdf) |
 
-## Examples
+### Examples
 
-Runnable examples to copy from:
-
-- [`examples/neurons/typescript`](examples/neurons/typescript) — TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`, `mcp-bridge`)
-- [`examples/neurons/python`](examples/neurons/python) — Python neurons (`http_fetch`, `web_search`)
+- [`examples/neurons`](examples/neurons) — TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`, `mcp-bridge`) and Python neurons (`http_fetch`, `web_search`)
 - [`examples/policy`](examples/policy) — a sample org policy (Moku decision matrix + compiled Shield bundle)
+
+<sub>Source: `holok-ai/bigbrain` @ `3182650`</sub>

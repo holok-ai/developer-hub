@@ -43,11 +43,11 @@ BIGBRAIN_NEURON_ID=my-ts-neuron-1 \
 npm start
 ```
 
-Auth is resolved by [`src/auth.ts`](./src/auth.ts) (`resolveAuth()`; enrolled
+Auth is resolved by [`src/auth.ts`](src/auth.ts) (`resolveAuth()`; enrolled
 credential preferred, `BIGBRAIN_TOKEN` fallback), documented once for all
 examples in **[../README.md → Authentication](../README.md#authentication)**.
 Use a **stable** `BIGBRAIN_NEURON_ID` across restarts.
 
 ## What to read next
 
-- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts and decisions behind this code.
+- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts and decisions behind this code.

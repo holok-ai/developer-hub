@@ -1,0 +1,44 @@
+{
+  "producer": "bigbrain",
+  "title": "BigBrain",
+  "intro": "Write **neurons** that execute work, author **workflow DAGs**, and use the SDKs.",
+  "order": 10,
+  "docs": [
+    {
+      "title": "Neuron Developer's Guide",
+      "output": "Neuron-Developers-Guide.pdf"
+    },
+    {
+      "title": "DAG Authoring Guide",
+      "output": "DAG-Authoring-Guide.pdf"
+    },
+    {
+      "title": "Neuron Architecture",
+      "output": "Neuron-Architecture.pdf"
+    },
+    {
+      "title": "Neuron SDK — TypeScript",
+      "output": "Neuron-SDK-Reference.pdf"
+    },
+    {
+      "title": "Neuron SDK — Python",
+      "output": "Neuron-SDK-Python-Reference.pdf"
+    }
+  ],
+  "examples": [
+    {
+      "dest": "examples/neurons",
+      "blurb": "TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`, `mcp-bridge`) and Python neurons (`http_fetch`, `web_search`)"
+    },
+    {
+      "dest": "examples/policy",
+      "blurb": "a sample org policy (Moku decision matrix + compiled Shield bundle)"
+    }
+  ],
+  "source": {
+    "repo": "holok-ai/bigbrain",
+    "sha": "3182650396d9e8157d89da3308fb7888d31bc7f8",
+    "ref": "main"
+  },
+  "publishedAt": "2026-09-21T15:16:18.526Z"
+}

@@ -63,11 +63,11 @@ EXAMPLES_WEB_SEARCH_ENDPOINT=https://your.searxng/search   # swap in a real prov
 EXAMPLES_WEB_SEARCH_UA="custom user agent"
 ```
 
-Auth is resolved by [`src/auth.ts`](./src/auth.ts) (`resolveAuth()`; enrolled
+Auth is resolved by [`src/auth.ts`](src/auth.ts) (`resolveAuth()`; enrolled
 credential preferred, `BIGBRAIN_TOKEN` fallback), documented once in
 **[../README.md → Authentication](../README.md#authentication)**. Use a **stable**
 `BIGBRAIN_NEURON_ID` across restarts.
 
 ## What to read next
 
-- [`docs/pdf/Neuron-Developers-Guide.pdf`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts behind this code.
+- [`docs/NEURON_DEVELOPERS_GUIDE.md`](../../../../docs/pdf/Neuron-Developers-Guide.pdf) — the concepts behind this code.
