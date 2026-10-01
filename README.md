@@ -22,4 +22,4 @@ Write **neurons** that execute work, author **workflow DAGs**, and use the SDKs.
 - [`examples/neurons`](examples/neurons) — TypeScript neurons (`http-fetch`, `progress-cancel`, `web-search`, `mcp-bridge`) and Python neurons (`http_fetch`, `web_search`)
 - [`examples/policy`](examples/policy) — a sample org policy (Moku decision matrix + compiled Shield bundle)
 
-<sub>Source: `holok-ai/bigbrain` @ `d236cd0`</sub>
+<sub>Source: `holok-ai/bigbrain` @ `6813904`</sub>
