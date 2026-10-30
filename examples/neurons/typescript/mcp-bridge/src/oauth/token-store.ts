@@ -20,6 +20,13 @@ import type { OAuthDiscoveryState } from '@modelcontextprotocol/sdk/client/auth.
  * it. That's the same explicit trade-off the desktop tester makes — this is a
  * developer example, and simplicity (no native keychain dep) wins. Delete the
  * file to force re-authorization.
+ *
+ * `tokens.issuer` and `client.issuer` name the authorization server that issued
+ * them. The SDK (1.31.0 and later) adds them to what it passes to `saveTokens`
+ * and `saveClientInformation`, and they are stored unchanged. A file saved by an
+ * earlier version has neither: `load()` gives them the authorization server
+ * recorded in `discovery` by the same sign-in, or, when there is none, drops
+ * them so you sign in again.
  */
 export interface McpTokenFile {
   client?: OAuthClientInformationMixed;
@@ -27,6 +34,42 @@ export interface McpTokenFile {
   codeVerifier?: string;
   state?: string;
   discovery?: OAuthDiscoveryState;
+}
+
+/**
+ * True when `a` and `b` name the same authorization server. Compares the parsed
+ * URLs and tolerates one trailing `/`, the same rule the SDK uses.
+ */
+export function issuersMatch(a: string, b: string): boolean {
+  let x = a;
+  let y = b;
+  try {
+    x = new URL(a).href;
+    y = new URL(b).href;
+  } catch {
+    // Not two URLs: compared as written.
+  }
+  return x === y || (x.endsWith('/') && x.slice(0, -1) === y) || (y.endsWith('/') && y.slice(0, -1) === x);
+}
+
+/**
+ * Brings a file saved before tokens carried an `issuer` up to date. Tokens and
+ * client information without a string `issuer` get the authorization server URL
+ * that the same sign-in recorded in `discovery`; when the file has no such URL
+ * they are dropped, so the next connect signs in again. Returns the file
+ * unchanged (same object) when nothing needed it.
+ */
+export function withStoredIssuer(file: McpTokenFile): McpTokenFile {
+  const recorded = file.discovery?.authorizationServerUrl;
+  const issuer = typeof recorded === 'string' && recorded.length > 0 ? recorded : undefined;
+  let next = file;
+  if (file.tokens && typeof file.tokens.issuer !== 'string') {
+    next = { ...next, tokens: issuer ? { ...file.tokens, issuer } : undefined };
+  }
+  if (file.client && typeof file.client.issuer !== 'string') {
+    next = { ...next, client: issuer ? { ...file.client, issuer } : undefined };
+  }
+  return next;
 }
 
 export class McpTokenStore {
@@ -38,17 +81,29 @@ export class McpTokenStore {
   }
 
   /** Best-effort read; empty record if the file is missing or corrupt. A broken
-   *  token file should never crash the neuron — clearing + re-auth recovers. */
+   *  token file should never crash the neuron; clearing + re-auth recovers. A
+   *  file saved without `issuer` is updated by `withStoredIssuer` and written back. */
   async load(): Promise<McpTokenFile> {
     if (this.cache) return this.cache;
+    let parsed: McpTokenFile;
     try {
       const raw = await fs.readFile(this.path, 'utf8');
-      this.cache = JSON.parse(raw) as McpTokenFile;
-      return this.cache;
+      parsed = JSON.parse(raw) as McpTokenFile;
+      if (!parsed || typeof parsed !== 'object') throw new Error('not a token record');
     } catch {
       this.cache = {};
       return this.cache;
     }
+    const current = withStoredIssuer(parsed);
+    this.cache = current;
+    if (current !== parsed) {
+      try {
+        await this.save(current);
+      } catch {
+        // The updated record stays in memory; the next save writes it.
+      }
+    }
+    return current;
   }
 
   async save(file: McpTokenFile): Promise<void> {

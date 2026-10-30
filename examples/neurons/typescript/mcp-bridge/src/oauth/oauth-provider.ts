@@ -10,7 +10,7 @@ import type {
   OAuthDiscoveryState,
 } from '@modelcontextprotocol/sdk/client/auth.js';
 
-import type { McpTokenStore } from './token-store.js';
+import { issuersMatch, type McpTokenStore } from './token-store.js';
 
 /**
  * Implements the MCP SDK's `OAuthClientProvider` against {@link McpTokenStore}.
@@ -80,16 +80,35 @@ export class OAuthProvider implements OAuthClientProvider {
   }
 
   async saveClientInformation(client: OAuthClientInformationMixed): Promise<void> {
+    // Stored as given, `issuer` included.
     await this.store.update({ client });
   }
 
+  /**
+   * Returns the stored tokens only when they carry an `issuer` and it is the
+   * authorization server the MCP server names (the one the SDK recorded in
+   * `discovery`). The transport sends what this returns without checking, so
+   * the check lives here. No `issuer`, or no recorded server yet: nothing is
+   * returned, and the SDK discovers the server and asks again. A different
+   * server: the tokens are dropped, so the next connect signs in again.
+   */
   async tokens(): Promise<OAuthTokens | undefined> {
-    return (await this.store.load()).tokens;
+    const file = await this.store.load();
+    const tokens = file.tokens;
+    if (!tokens || typeof tokens.issuer !== 'string') return undefined;
+    const server = file.discovery?.authorizationServerUrl;
+    if (typeof server !== 'string') return undefined;
+    if (!issuersMatch(tokens.issuer, server)) {
+      await this.store.update({ tokens: undefined });
+      return undefined;
+    }
+    return tokens;
   }
 
   async saveTokens(tokens: OAuthTokens): Promise<void> {
-    // Verifier + state are only valid during the in-flight exchange; clear both
-    // once tokens land so a stale value can't poison a later run.
+    // Stored as given, `issuer` included. Verifier + state are only valid during
+    // the in-flight exchange; clear both once tokens land so a stale value can't
+    // poison a later run.
     await this.store.update({ tokens, codeVerifier: undefined, state: undefined });
   }
 

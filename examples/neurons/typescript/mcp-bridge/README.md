@@ -100,6 +100,12 @@ directory with `MCP_TOKEN_DIR`). Subsequent runs reuse the refresh token; the
 transport refreshes access tokens transparently. Delete the token file to force
 re-authorization.
 
+The token file records which authorization server issued the tokens (`issuer`),
+and the bridge only sends them while the server still names that one; if it
+names another, the tokens are dropped and you sign in again. A token file saved
+by an earlier version without `issuer` is given the server its own sign-in
+recorded, or, if it has none, cleared so you sign in again.
+
 > Tokens are stored as **plain JSON** — the same developer-tool trade-off the
 > desktop tester makes. Fine for local development; use a real secret store for
 > anything else.
