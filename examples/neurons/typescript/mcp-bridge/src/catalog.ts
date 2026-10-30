@@ -39,7 +39,7 @@ const stdioServer = z.object({
   command: z.string().min(1),
   args: z.array(z.string()).default([]),
   cwd: z.string().optional(),
-  env: z.record(z.string()).optional(),
+  env: z.record(z.string(), z.string()).optional(),
 });
 
 const httpServer = z.object({

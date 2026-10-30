@@ -17,8 +17,8 @@ capability, classify failures correctly, and shut down on SIGINT/SIGTERM.
 ## SDK
 
 They depend on [`@holokai/neuron-sdk`](https://www.npmjs.com/package/@holokai/neuron-sdk)
-(**≥ 0.3.0**), published to **public npm** — `npm install` resolves it with no
-registry config or auth. Requires Node.js 20+.
+(**≥ 0.8.0**, which takes zod 4 schemas), published to **public npm**: `npm install`
+resolves it with no registry config or auth. Requires Node.js 20+.
 
 ## Authentication
 

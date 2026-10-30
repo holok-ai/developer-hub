@@ -29,13 +29,13 @@ const httpFetch = defineCapability({
   input: z.object({
     url: z.string().url(),
     method: z.enum(['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE']).default('GET'),
-    headers: z.record(z.string()).optional(),
+    headers: z.record(z.string(), z.string()).optional(),
     body: z.string().nullish(),
     timeoutMs: z.number().int().min(100).max(60_000).default(10_000),
   }),
   output: z.object({
     status: z.number().int(),
-    headers: z.record(z.string()),
+    headers: z.record(z.string(), z.string()),
     body: z.string(),
     durationMs: z.number().int(),
     finalUrl: z.string(),
